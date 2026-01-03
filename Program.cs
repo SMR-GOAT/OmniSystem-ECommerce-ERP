@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using MVCCourse.Data;
 using MVCCourse.Models;
 using FluentValidation;
-using FluentValidation.AspNetCore; // تأكد من وجود هذه المكتبة
+using FluentValidation.AspNetCore;
+using MVCCourse.Services; // تأكد من وجود هذه المكتبة
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => {
 
 // إعداد الـ AutoMapper (الطريقة الصحيحة لـ .NET 8)
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddApplicationServices();
 
 // إعداد الـ Razor Pages (مطلوب لـ Identity UI إذا كنت تستخدمها)
 builder.Services.AddRazorPages();

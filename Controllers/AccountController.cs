@@ -1,18 +1,17 @@
-
 using Microsoft.AspNetCore.Mvc;
-using MVCCourse.Models;
-using Microsoft.AspNetCore.Identity;
+using MVCCourse.Services.Interfaces; // استدعاء المجلد الجديد للواجهات
 using MVCCourse.ViewModels;
 
 namespace MVCCourse.Controllers;
 
 public class AccountController : Controller
 {
-    private readonly SignInManager<ApplicationUser> _signInManager;
+    // لم نعد نحتاج SignInManager هنا، استبدلناه بالسيرفس حقنا
+    private readonly IAccountService _accountService;
 
-    public AccountController(SignInManager<ApplicationUser> signInManager)
+    public AccountController(IAccountService accountService)
     {
-        _signInManager = signInManager;
+        _accountService = accountService;
     }
 
     [HttpGet]
@@ -21,17 +20,29 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
-        if (!ModelState.IsValid) return View(model);
-
-        // هنا السحر: تسجيل دخول باستخدام UserName وليس الإيميل
-        var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
-
-        if (result.Succeeded)
+        if (ModelState.IsValid)
         {
-            return RedirectToAction("Index", "Home"); // يوديه للي فيه Layout
-        }
+            // الكنترولر يطلب من السيرفس تنفيذ الدخول وينتظر النتيجة فقط
+            var result = await _accountService.LoginAsync(model);
 
-        ModelState.AddModelError("", "خطأ في اسم المستخدم أو كلمة المرور");
+            if (result.Succeeded)
+            {
+                // إذا نجح الدخول، توجه للصفحة الرئيسية
+                return RedirectToAction("Index", "Home");
+            }
+            
+            // إذا فشل، أظهر رسالة خطأ
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+        }
+        
+        // إذا البيانات غير صالحة (Validation failed)، أرجع لنفس الصفحة
         return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        await _accountService.LogoutAsync();
+        return RedirectToAction("Login");
     }
 }
