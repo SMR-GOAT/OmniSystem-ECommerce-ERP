@@ -21,3 +21,7 @@ function togglePassVisibility() {
         icon.classList.replace('bi-eye', 'bi-eye-slash');
     }
 }
+
+
+ 
+  

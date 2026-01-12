@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
-using MVCCourse.ViewModels;
+using OmniSystem.ViewModels;
 
-namespace MVCCourse.Services.Interfaces;
+namespace OmniSystem.Services.Interfaces;
 
 public interface IUserService
 {

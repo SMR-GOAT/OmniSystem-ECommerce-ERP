@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using MVCCourse.Services.Interfaces; // استدعاء المجلد الجديد للواجهات
-using MVCCourse.ViewModels;
+using OmniSystem.Services.Interfaces; // استدعاء المجلد الجديد للواجهات
+using OmniSystem.ViewModels;
 
-namespace MVCCourse.Controllers;
+namespace OmniSystem.Controllers;
 
 public class AccountController : Controller
 {

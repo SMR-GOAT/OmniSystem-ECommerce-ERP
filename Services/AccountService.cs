@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
-using MVCCourse.Models;
-using MVCCourse.ViewModels;
-using MVCCourse.Services.Interfaces; // استدعاء الواجهة
+using OmniSystem.Models;
+using OmniSystem.ViewModels;
+using OmniSystem.Services.Interfaces; // استدعاء الواجهة
 
-namespace MVCCourse.Services;
+namespace OmniSystem.Services;
 
 public class AccountService : IAccountService
 {

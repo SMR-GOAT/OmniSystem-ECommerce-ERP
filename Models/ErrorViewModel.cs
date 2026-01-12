@@ -1,4 +1,4 @@
-namespace MVCCourse.Models;
+namespace OmniSystem.Models;
 
 public class ErrorViewModel
 {

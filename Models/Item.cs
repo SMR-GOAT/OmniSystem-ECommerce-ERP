@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MVCCourse.Models;
+namespace OmniSystem.Models;
 
 public class Item
 {

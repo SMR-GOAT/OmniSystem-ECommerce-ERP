@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MVCCourse.Models;
+using OmniSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace MVCCourse.Controllers;
+namespace OmniSystem.Controllers;
 
 [Authorize]
 public class HomeController : Controller

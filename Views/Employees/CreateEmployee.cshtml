@@ -1,0 +1,207 @@
+@model OmniSystem.ViewModels.CreateEmployeeViewModel
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2/dist/css/nice-select2.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root { 
+        --primary: #4f46e5; 
+        --primary-hover: #4338ca;
+        --secondary: #64748b;
+        --bg-main: #f1f5f9;
+        --glass: rgba(255, 255, 255, 0.95);
+        --gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    }
+
+    body { background: var(--bg-main); font-family: 'Plus Jakarta Sans', sans-serif; color: #1e293b; }
+
+    .main-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+
+    .premium-card { 
+        background: var(--glass); 
+        border-radius: 2.5rem; 
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08); 
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        overflow: visible !important; 
+        width: 100%;
+        max-width: 1100px;
+    }
+
+    .brand-side { 
+        background: var(--gradient); 
+        padding: 60px 40px; 
+        color: white; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-between;
+        position: relative;
+        border-radius: 2.5rem 0 0 2.5rem;
+    }
+
+    .form-section { padding: 50px 60px; position: relative; overflow: visible !important; }
+    
+    .section-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; color: #0f172a; display: flex; align-items: center; gap: 10px; }
+    .section-title::after { content: ""; height: 2px; flex-grow: 1; background: #e2e8f0; margin-left: 10px; }
+
+    .input-group-modern { margin-bottom: 20px; position: relative; }
+    .input-group-modern label { font-size: 0.85rem; font-weight: 600; color: var(--secondary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    
+    .input-group-modern input, .nice-select { 
+        width: 100%; border: 2px solid #e2e8f0 !important; border-radius: 14px !important; padding: 12px 16px !important;
+        background: #ffffff !important; transition: all 0.3s ease !important;
+        font-size: 0.95rem !important; height: auto !important; line-height: inherit !important;
+    }
+
+    .input-group-modern input:focus { border-color: var(--primary) !important; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important; outline: none; }
+
+    .password-wrapper { position: relative; }
+    .toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #94a3b8; font-size: 1.1rem; z-index: 10; }
+    
+    /* Dropdown Styling */
+    .nice-select .list { 
+        border-radius: 16px !important; 
+        box-shadow: 0 -10px 25px rgba(0,0,0,0.1) !important; 
+        z-index: 9999 !important;
+        max-height: 250px !important;
+        overflow-y: auto !important;
+    }
+
+    .nice-select.open .list { bottom: 100% !important; top: auto !important; margin-bottom: 10px !important; }
+
+    /* Button Styling */
+    .btn-submit { 
+        background: var(--gradient); color: white; border: none; padding: 18px; border-radius: 16px;
+        font-weight: 700; font-size: 1.1rem; width: 100%; margin-top: 10px; cursor: pointer;
+        transition: all 0.3s; box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+    }
+    .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.5); }
+
+    /* Financial Badge Styling */
+    .stat-input { background: #f8fafc !important; font-weight: 600; color: var(--primary); }
+</style>
+
+<div class="main-wrapper">
+    <div class="premium-card">
+        <div class="row g-0">
+            <div class="col-lg-4 brand-side d-none d-lg-flex">
+                <div>
+                    <div class="mb-5 bg-white bg-opacity-20 d-inline-block p-3 rounded-4">
+                        <i class="bi bi-person-workspace fs-2"></i>
+                    </div>
+                    <h1 class="display-5 fw-bold mb-3">Admin<br>Portal</h1>
+                    <p class="fs-5 opacity-75">Elite Workforce Management System.</p>
+                </div>
+                <div class="border-top border-white border-opacity-20 pt-4">
+                    <span class="small fw-medium"><i class="bi bi-patch-check-fill me-2"></i>System Secure</span>
+                </div>
+            </div>
+
+            <div class="col-lg-8 form-section">
+                <form asp-action="CreateEmployee" method="post">
+                    
+                    <div class="section-title"><i class="bi bi-person-badge text-primary"></i> Basic Info</div>
+                    <div asp-validation-summary="All" class="text-danger small mb-3"></div>
+
+                    <div class="row">
+                        <div class="col-md-6 input-group-modern">
+                            <label asp-for="FirstName">First Name</label>
+                            <input asp-for="FirstName" placeholder="John" />
+                        </div>
+                        <div class="col-md-6 input-group-modern">
+                            <label asp-for="LastName">Last Name</label>
+                            <input asp-for="LastName" placeholder="Doe" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 input-group-modern">
+                            <label asp-for="Email">Email Address</label>
+                            <input asp-for="Email" type="email" placeholder="john@company.com" />
+                        </div>
+                        <div class="col-md-6 input-group-modern">
+                            <label asp-for="PhoneNumber">Mobile Number</label>
+                            <input asp-for="PhoneNumber" placeholder="05xxxxxxxx" />
+                        </div>
+                    </div>
+
+                    <div class="section-title mt-2"><i class="bi bi-shield-lock text-primary"></i> Account Details</div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 input-group-modern">
+                            <label asp-for="UserName">System Username</label>
+                            <input asp-for="UserName" placeholder="j.doe_99" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 input-group-modern">
+                            <label asp-for="Password">Password</label>
+                            <div class="password-wrapper">
+                                <input asp-for="Password" type="password" id="pass" />
+                                <i class="bi bi-eye toggle-password" onclick="toggle('pass', this)"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6 input-group-modern">
+                            <label asp-for="ConfirmPassword">Confirm</label>
+                            <div class="password-wrapper">
+                                <input asp-for="ConfirmPassword" type="password" id="conf" />
+                                <i class="bi bi-eye toggle-password" onclick="toggle('conf', this)"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title mt-2"><i class="bi bi-briefcase text-primary"></i> Professional Metrics</div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6 input-group-modern">
+                            <label><i class="bi bi-layers"></i> Assigned Role</label>
+                            <select name="SelectedPositionId" id="pos-select" class="wide">
+                                <option disabled selected>Select Position...</option>
+                                @foreach (var pos in (IEnumerable<OmniSystem.Models.Position>)ViewBag.Positions)
+                                {
+                                    <option value="@pos.Id">@pos.Name</option>
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3 input-group-modern">
+                            <label asp-for="Salary"><i class="bi bi-cash-stack"></i> Salary</label>
+                            <input asp-for="Salary" class="stat-input" type="number" step="0.01" value="0.00" />
+                        </div>
+
+                        <div class="col-md-3 input-group-modern">
+                            <label asp-for="Rating"><i class="bi bi-star-fill text-warning"></i> Rating</label>
+                            <input asp-for="Rating" class="stat-input" type="number" step="0.1" min="0" max="5" value="0.0" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="bi bi-person-plus-fill me-2"></i> Register New Talent
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/nice-select2/dist/js/nice-select2.js"></script>
+    <script>
+        var options = { searchable: true, placeholder: 'Search Roles...' };
+        NiceSelect.bind(document.getElementById("pos-select"), options);
+        
+        function toggle(id, el) {
+            const input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+                el.classList.replace("bi-eye", "bi-eye-slash");
+            } else {
+                input.type = "password";
+                el.classList.replace("bi-eye-slash", "bi-eye");
+            }
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

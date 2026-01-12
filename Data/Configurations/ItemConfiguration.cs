@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MVCCourse.Models;
+using OmniSystem.Models;
 
-namespace MVCCourse.Data.Configurations;
+namespace OmniSystem.Data.Configurations;
 
 public class ItemConfiguration : IEntityTypeConfiguration<Item>
 {

@@ -1,11 +1,11 @@
-using MVCCourse.Validations;
+using OmniSystem.Validations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using MVCCourse.Data;
-using MVCCourse.Models;
+using OmniSystem.Data;
+using OmniSystem.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using MVCCourse.Services;
+using OmniSystem.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,11 +31,12 @@ builder.Services.AddIdentity<ApplicationUserModel, IdentityRole>(options => {
     options.User.RequireUniqueEmail = true; // ضمان عدم تكرار الإيميل
     
     // إعدادات كلمة المرور (Password Complexity)
-    options.Password.RequireDigit = true;
-    options.Password.RequiredLength = 8;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequireLowercase = true;
+  // في Program.cs عدل الجزء الخاص بالـ Password ليصبح هكذا:
+options.Password.RequireDigit = false;
+options.Password.RequiredLength = 6; // نفس طول الـ Validator
+options.Password.RequireNonAlphanumeric = false;
+options.Password.RequireUppercase = false;
+options.Password.RequireLowercase = false;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
@@ -88,9 +89,7 @@ using (var scope = app.Services.CreateScope())
         var userManager = services.GetRequiredService<UserManager<ApplicationUserModel>>();
         
         // استدعاء بيانات البداية
-        await DbInitializer.SeedData(roleManager, userManager);
-        
-        Console.WriteLine("System is ready and database is synchronized!");
+        await DbInitializer.SeedData(roleManager, userManager,context);
     }
     catch (Exception ex)
     {

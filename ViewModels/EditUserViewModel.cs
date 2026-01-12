@@ -1,4 +1,4 @@
-namespace MVCCourse.ViewModels;
+namespace OmniSystem.ViewModels;
 
 public class EditUserViewModel
 {

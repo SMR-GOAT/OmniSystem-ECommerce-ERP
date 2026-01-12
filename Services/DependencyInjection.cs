@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace MVCCourse.Services;
+namespace OmniSystem.Services;
 
 public static class DependencyInjection
 {

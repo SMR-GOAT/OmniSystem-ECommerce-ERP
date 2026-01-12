@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pT+HUGGuQJ0=",
+  "dgSpecHash": "fdbNlglDvUY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Saeer Ali\\Desktop\\MVCCourse\\MVCCourse.csproj",
+  "projectFilePath": "C:\\Web Projects\\OmniSystem\\OmniSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Saeer Ali\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Saeer Ali\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",

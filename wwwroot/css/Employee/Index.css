@@ -1,0 +1,5 @@
+    body { background-color: #f3f4f7; font-family: 'Segoe UI', sans-serif; }
+    .table thead th { font-size: 0.75rem; letter-spacing: 0.5px; border-bottom: none; }
+    .card { border-radius: 15px; }
+    .badge { font-weight: 500; font-size: 0.8rem; }
+    .btn { border-radius: 8px; transition: 0.3s; }

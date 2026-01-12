@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MVCCourse.Controllers
+namespace OmniSystem.Controllers
 {
     public class ClientsController : Controller
     {

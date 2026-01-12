@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Identity;
-using MVCCourse.Models;
-using MVCCourse.ViewModels;
-using MVCCourse.Services.Interfaces;
+using OmniSystem.Models;
+using OmniSystem.ViewModels;
+using OmniSystem.Services.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace MVCCourse.Services;
+namespace OmniSystem.Services;
 
 public class UserService : IUserService
 {
@@ -62,20 +62,31 @@ public async Task DeleteUserAsync(string id)
     }
 }
 
-    public async Task<List<UserListViewModel>> GetAllUsersWithRolesAsync()
+   public async Task<List<UserListViewModel>> GetAllUsersWithRolesAsync()
+{
+    // 1. جلب المستخدمين الذين ينتمون فقط لـ Admin أو SuperAdmin
+    // نستخدم _userManager للوصول للمستخدمين في تلك الأدوار
+    var admins = await _userManager.GetUsersInRoleAsync("Admin");
+    var superAdmins = await _userManager.GetUsersInRoleAsync("SuperAdmin");
+
+    // 2. دمج القائمتين في قائمة واحدة
+    var filteredUsers = admins.Concat(superAdmins).DistinctBy(u => u.Id).ToList();
+
+    // 3. تحويلهم إلى ViewModel باستخدام AutoMapper
+    var userList = _mapper.Map<List<UserListViewModel>>(filteredUsers);
+
+    // 4. تعيين الأدوار (لأن GetUsersInRole تجلب الكائنات بدون الأدوار بداخلها)
+    foreach (var userViewModel in userList)
     {
-        var users = await _userManager.Users.ToListAsync();
-        var userList = _mapper.Map<List<UserListViewModel>>(users);
-
-        foreach (var userViewModel in userList)
-        {
-            var user = users.First(u => u.Id == userViewModel.Id);
-            var roles = await _userManager.GetRolesAsync(user);
-            userViewModel.Role = roles.FirstOrDefault() ?? "No Role";
-        }
-
-        return userList;
+        var user = filteredUsers.First(u => u.Id == userViewModel.Id);
+        var roles = await _userManager.GetRolesAsync(user);
+        
+        // نضع الدور الأول الموجود (سواء كان Admin أو SuperAdmin)
+        userViewModel.Role = roles.FirstOrDefault() ?? "No Role";
     }
+
+    return userList;
+}
 
     // جلب بيانات المستخدم للتعديل
     public async Task<EditUserViewModel> GetUserForEditAsync(string id)

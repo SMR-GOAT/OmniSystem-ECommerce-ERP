@@ -56,3 +56,35 @@
 
     .fs-7 { font-size: 0.85rem; }
 
+ .top-alert {
+    position: fixed;
+    top: -120px; /* البداية خارج الشاشة */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    
+    /* التحكم بالعرض */
+    width: auto;
+    min-width: 500px; /* هذا السطر يضمن أنها عريضة كفاية */
+    max-width: 800px; /* لا تتوسع أكثر من اللازم في الشاشات الضخمة */
+    
+    padding: 18px 30px;
+    border: none;
+    border-radius: 16px;
+    background: #ffffff; /* خلفية بيضاء مع برواز أخضر خفيف يعطي فخامة أكثر من الأخضر الكامل */
+    border-left: 6px solid #198754; 
+    color: #198754;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.top-alert.show-now {
+    top: 30px; /* النزول لمسافة مناسبة من الأعلى */
+}
+
+.top-alert.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -30px);
+    transition: all 0.7s ease;
+}

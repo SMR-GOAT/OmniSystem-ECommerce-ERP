@@ -1,23 +1,30 @@
 using AutoMapper;
-using MVCCourse.Models;
-using MVCCourse.ViewModels;
-
+using OmniSystem.Models;
+using OmniSystem.ViewModels;
 
 public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        // --- 1. خريطة العرض (من الداتابيز إلى الجدول) ---
-        CreateMap<ApplicationUserModel, UserListViewModel>()
-            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName))
-            .ForMember(dest => dest.Role, opt => opt.Ignore());
+        // --- 1. خريطة عرض الموظفين (من الداتابيز للجدول) ---
+        CreateMap<ApplicationUserModel, EmployeeListViewModel>()
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+            .ForMember(dest => dest.PositionName, opt => opt.MapFrom(src => src.Position != null ? src.Position.Name : "N/A"))
+            .ForMember(dest => dest.Initials, opt => opt.MapFrom(src => 
+                ((src.FirstName ?? " ").Substring(0, 1) + (src.LastName ?? " ").Substring(0, 1)).ToUpper()));
 
-        // --- 2. خريطة الإنشاء (من الفورم إلى الداتابيز) ---
-        // هذا هو السطر الذي ينقصك ويسبب الخطأ الحالي
-        CreateMap<CreateUserViewModel, ApplicationUserModel>()
-            // نتجاهل الـ PasswordHash لأن Identity سيقوم بتشفير الباسورد ووضعه يدوياً
+        // --- 2. خريطة إنشاء موظف (من الفورم للداتابيز) ---
+        CreateMap<CreateEmployeeViewModel, ApplicationUserModel>()
+            .ForMember(dest => dest.PositionId, opt => opt.MapFrom(src => src.SelectedPositionId))
             .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
-            
-      CreateMap<EditUserViewModel, ApplicationUserModel>().ReverseMap();
+
+        // --- 3. خرائط المستخدمين الأخرى (User) ---
+        CreateMap<ApplicationUserModel, UserListViewModel>()
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName));
+
+        CreateMap<CreateUserViewModel, ApplicationUserModel>()
+            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
+
+        CreateMap<EditUserViewModel, ApplicationUserModel>().ReverseMap();
     }
 }

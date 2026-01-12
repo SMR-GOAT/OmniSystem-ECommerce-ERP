@@ -1,7 +1,7 @@
-@model IEnumerable<MVCCourse.ViewModels.UserListViewModel>
+@model IEnumerable<OmniSystem.ViewModels.UserListViewModel>
 
 @{
-    ViewData["Title"] = "User Management";
+    ViewData["Title"] = "Admins";
 }
 
 @section Styles {
@@ -12,13 +12,30 @@
 <div class="container-fluid mt-5 px-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="fw-bold text-dark mb-1">User Management</h2>
+            <h2 class="fw-bold text-dark mb-1">Admin Management</h2>
             <p class="text-muted small">Overview of system administrators and staff members.</p>
         </div>
         <a asp-action="Create" class="btn btn-primary shadow-sm px-4 rounded-pill fw-bold">
-            <i class="bi bi-person-plus-fill me-2"></i>Add New User
+            <i class="bi bi-person-plus-fill me-2"></i>Add New Admin
         </a>
     </div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="success-alert" class="alert alert-success shadow-lg top-alert" role="alert">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill me-3 fs-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-0">Notification</h6>
+                    <p class="mb-0 small">@TempData["SuccessMessage"]</p>
+                </div>
+            </div>
+            @* زر إغلاق اختياري لإعطاء مظهر التنبيهات الكاملة *@
+            <button type="button" class="btn-close ms-4" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
 
     <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
         <div class="card-body p-0">
@@ -26,10 +43,10 @@
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-light">
                         <tr class="text-dark">
-                            <th class="ps-4 py-3 text-uppercase fs-7 fw-bold border-0">User Info</th>
-                            <th class="py-3 text-uppercase fs-7 fw-bold border-0">System Role</th>
+                            <th class="ps-4 py-3 text-uppercase fs-7 fw-bold border-0">Admin Info</th>
+                            <th class="py-3 text-uppercase fs-7 fw-bold border-0">Role</th>
                             <th class="py-3 text-uppercase fs-7 fw-bold border-0">Contact Details</th>
-                            <th class="py-3 text-uppercase fs-7 fw-bold border-0">Annual Salary</th>
+                            <th class="py-3 text-uppercase fs-7 fw-bold border-0">Salary</th>
                             <th class="py-3 text-uppercase fs-7 fw-bold text-center border-0">Actions</th>
                         </tr>
                     </thead>

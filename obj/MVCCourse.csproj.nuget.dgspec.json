@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Saeer Ali\\Desktop\\MVCCourse\\MVCCourse.csproj": {}
+    "C:\\Web Projects\\OmniSystem\\MVCCourse.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Saeer Ali\\Desktop\\MVCCourse\\MVCCourse.csproj": {
+    "C:\\Web Projects\\OmniSystem\\MVCCourse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Saeer Ali\\Desktop\\MVCCourse\\MVCCourse.csproj",
+        "projectUniqueName": "C:\\Web Projects\\OmniSystem\\MVCCourse.csproj",
         "projectName": "MVCCourse",
-        "projectPath": "C:\\Users\\Saeer Ali\\Desktop\\MVCCourse\\MVCCourse.csproj",
+        "projectPath": "C:\\Web Projects\\OmniSystem\\MVCCourse.csproj",
         "packagesPath": "C:\\Users\\Saeer Ali\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Saeer Ali\\Desktop\\MVCCourse\\obj\\",
+        "outputPath": "C:\\Web Projects\\OmniSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

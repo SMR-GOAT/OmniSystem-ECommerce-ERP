@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MVCCourse.Models;
+using OmniSystem.Models;
 using System.Reflection; // مهم لاستخدام ApplyConfigurationsFromAssembly
 
-namespace MVCCourse.Data
+namespace OmniSystem.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUserModel>
     {
         public DbSet<Item> Items { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

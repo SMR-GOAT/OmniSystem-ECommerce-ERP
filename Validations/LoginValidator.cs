@@ -1,7 +1,7 @@
 using FluentValidation;
-using MVCCourse.ViewModels;
+using OmniSystem.ViewModels;
 
-namespace MVCCourse.Validations
+namespace OmniSystem.Validations
 {
     public class LoginValidator : AbstractValidator<LoginViewModel>
     {
